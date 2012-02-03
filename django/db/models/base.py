@@ -49,7 +49,8 @@ class ModelBase(type):
             # Figure out the app_label by looking one level up.
             # For 'django.contrib.sites.models', this would be 'sites'.
             model_module = sys.modules[new_class.__module__]
-            kwargs = {"app_label": model_module.__name__.split('.')[-2]}
+            module_names = model_module.__name__.split('.')
+            kwargs = {"app_label": module_names[module_names.index('models')-1]}
         else:
             kwargs = {}
 
